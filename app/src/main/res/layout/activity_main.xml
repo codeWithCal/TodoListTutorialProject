@@ -7,30 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/taskName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Task Name:"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/taskDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Task Desc:"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
+        android:id="@+id/todoListRecyclerView"
+        android:backgroundTint="@color/design_default_color_background"
+        />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"

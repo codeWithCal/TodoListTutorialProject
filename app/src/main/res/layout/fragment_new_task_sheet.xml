@@ -9,6 +9,7 @@
 
 
     <TextView
+        android:id="@+id/taskTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Task"
@@ -51,11 +52,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/timePickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:text="Select Time"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?colorOnPrimary"
         android:text="Save"/>
 
 </LinearLayout>

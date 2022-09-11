@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/checked_24.xml" value="0.1855" />
+        <entry key="app/src/main/res/drawable/unchecked_24.xml" value="0.1855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/layout/fragment_new_task_sheet.xml" value="0.22962962962962963" />
+        <entry key="app/src/main/res/layout/task_item_cell.xml" value="0.2992849846782431" />
       </map>
     </option>
   </component>
