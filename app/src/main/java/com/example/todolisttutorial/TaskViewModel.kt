@@ -1,42 +1,35 @@
 package com.example.todolisttutorial
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.LocalTime
-import java.util.*
 
-class TaskViewModel: ViewModel()
+class TaskViewModel(private val repository: TaskItemRepository): ViewModel()
 {
-    var taskItems = MutableLiveData<MutableList<TaskItem>>()
+    val taskItems: LiveData<List<TaskItem>> = repository.allTaskItems.asLiveData()
 
-    init {
-        taskItems.value = mutableListOf()
+    fun addTaskItem(taskItem: TaskItem) = viewModelScope.launch {
+        repository.insertTaskItem(taskItem)
     }
 
-    fun addTaskItem(newTask: TaskItem)
-    {
-        val list = taskItems.value
-        list!!.add(newTask)
-        taskItems.postValue(list)
+    fun updateTaskItem(taskItem: TaskItem) = viewModelScope.launch {
+        repository.updateTaskItem(taskItem)
     }
 
-    fun updateTaskItem(id: UUID, name: String, desc: String, dueTime: LocalTime?)
-    {
-        val list = taskItems.value
-        val task = list!!.find { it.id == id }!!
-        task.name = name
-        task.desc = desc
-        task.dueTime = dueTime
-        taskItems.postValue(list)
+    fun setCompleted(taskItem: TaskItem) = viewModelScope.launch {
+        if (!taskItem.isCompleted())
+            taskItem.completedDateString = TaskItem.dateFormatter.format(LocalDate.now())
+        repository.updateTaskItem(taskItem)
     }
+}
 
-    fun setCompleted(taskItem: TaskItem)
+class TaskItemModelFactory(private val repository: TaskItemRepository) : ViewModelProvider.Factory
+{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T
     {
-        val list = taskItems.value
-        val task = list!!.find { it.id == taskItem.id }!!
-        if (task.completedDate == null)
-            task.completedDate = LocalDate.now()
-        taskItems.postValue(list)
+        if (modelClass.isAssignableFrom(TaskViewModel::class.java))
+            return TaskViewModel(repository) as T
+
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
